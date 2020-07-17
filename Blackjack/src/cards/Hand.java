@@ -10,6 +10,24 @@ public class Hand {
 		hand = new ArrayList<Card>();
 	}
 	
+	/**
+	 * function that return whether the player has a loosing hand.
+	 * 
+	 * @return boolean
+	 */
+	public boolean isBust() {
+		int handValue = calculateValue();
+		if (handValue > 21) {
+			return true;
+		}
+		return false;
+	}
+	
+	/**
+	 * returns whether the hand can be split in two hands.
+	 * 
+	 * @return boolean
+	 */
 	public boolean isSplittable() {
 		if (!isFirstRound()) return false;
 		else {
@@ -24,17 +42,41 @@ public class Hand {
 		}
 	}
 
+	/**
+	 * function that returns whether the player is restricted to stand
+	 * 
+	 * @return boolean
+	 */
 	public boolean isRestricted() {
-		return true;
+		int handValue = calculateValue();
+		if (handValue == 21) {
+			return true;
+		}
+		return false;
 	}
 	
+	/**
+	 * function that returns whether the players are playing the first round or not
+	 * 
+	 * @return boolean
+	 * 
+	 */
 	public boolean isFirstRound() {
 		if (hand.size() == 2) return true;
 		return false;
 	}
 	
+	/**
+	 * function that calculates the total value of a hand.
+	 * 
+	 * @return totalValue : int
+	 */
 	public int calculateValue() {
-		return 1;
+		int totalValue = 0;
+		for (Card card : hand) {
+			totalValue += card.getValue();
+		}
+		return totalValue;
 	}
 	
 	public void addCard(Card card) {
