@@ -16,6 +16,8 @@ public abstract class BlackJackPlayer {
 
 	public abstract void play(Hand hand, Dealer dealer);
 	
+	public abstract void printGameInfo(Hand hand);
+	
 	public boolean isStand() {
 		return stand;
 	}

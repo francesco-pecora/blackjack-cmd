@@ -56,8 +56,9 @@ public class Deck {
 	}
 	
 	public Card pop() {
-		Card toReturn = cards.get(0);
-		cards.remove(0);
+		int lastIndex = cards.size() - 1;
+		Card toReturn = cards.get(lastIndex);
+		cards.remove(lastIndex);
 		return toReturn;
 	}
 	

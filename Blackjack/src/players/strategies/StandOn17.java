@@ -1,6 +1,5 @@
 package players.strategies;
 
-import cards.Hand;
 import constants.Constants;
 import players.Dealer;
 
@@ -14,6 +13,9 @@ public class StandOn17 {
 	
 	public void hit() {
 		dealer.dealerGetsNewCard();
+		if (dealer.getHand().calculateValue() >= Constants.DEALER_STANDS_ON) {
+			dealer.setStand(true);
+		}
 	}
 	
 	public void stand() {

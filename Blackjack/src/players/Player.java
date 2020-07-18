@@ -121,6 +121,7 @@ public class Player extends BlackJackPlayer{
 	 * 
 	 * @param hand : Hand
 	 */
+	@Override
 	public void printGameInfo(Hand hand) {
 		System.out.println("Cards:");
 		System.out.println(hand);
@@ -248,7 +249,11 @@ public class Player extends BlackJackPlayer{
 		dealer.handCardToPlayer(player.getHand());
 		dealer.handCardToPlayer(player.getHand());
 		
+		dealer.dealerGetsNewCard();
+		dealer.dealerGetsNewCard();
+		
 		player.play(player.getHand(), dealer);
+		dealer.play(dealer.getHand(), dealer);
 	}
 	
 }
