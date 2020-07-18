@@ -4,15 +4,25 @@ import cards.Hand;
 
 public abstract class BlackJackPlayer {
 
-	private Hand hand;
+	protected Hand hand;
+	protected Hand splitHand;
+	protected boolean stand;
 	
 	public BlackJackPlayer() {
-		hand = new Hand();
+		setHand(new Hand());
+		setSplitHand(new Hand());
+		setStand(false);
 	}
+
+	public abstract void play(Hand hand, Dealer dealer);
 	
-	public abstract void hit();
-	
-	public abstract void stand();
+	public boolean isStand() {
+		return stand;
+	}
+
+	public void setStand(boolean stand) {
+		this.stand = stand;
+	}
 
 	public Hand getHand() {
 		return hand;
@@ -21,4 +31,14 @@ public abstract class BlackJackPlayer {
 	public void setHand(Hand hand) {
 		this.hand = hand;
 	}
+
+	public Hand getSplitHand() {
+		return splitHand;
+	}
+
+	public void setSplitHand(Hand splitHand) {
+		this.splitHand = splitHand;
+	}
+	
+	
 }

@@ -1,15 +1,15 @@
 package cards;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 
 import constants.Constants;
 
 public class Deck {
 
-	private Card[] cards;
+	private ArrayList<Card> cards;
 
 	public Deck() {
-		cards = new Card[Constants.NUM_OF_DECKS * Constants.CARDS_PER_DECK];
+		cards = new ArrayList<Card>();
 		initializeDeck();
 	}
 	
@@ -30,27 +30,35 @@ public class Deck {
 					//      - first member increases the index for each different deck
 					//		- second member increases the index for each suit
 					//		- third member increases the index for each number in one straight
-					int index = (52 * k) + (13 * i) + (j - 1);
-					
+					//int index = (52 * k) + (13 * i) + (j - 1);
+
+					Card currentCard = new Card("", 0);
 					if (j == 1) {
-						cards[index] = new Card("A", 11);
+						currentCard = new Card("A", 11);
 					}
 					else if (j > 1 && j < 11) {
-						cards[index] = new Card(String.valueOf(j), j);
+						currentCard = new Card(String.valueOf(j), j);
 					}
 					else if (j == 11){
-						cards[index] = new Card("J", 10);
+						currentCard = new Card("J", 10);
 					}
 					else if (j == 12) {
-						cards[index] = new Card("Q", 10);
+						currentCard = new Card("Q", 10);
 					}
 					else if (j == 13) {
-						cards[index] = new Card("K", 10);
+						currentCard = new Card("K", 10);
 					}
+					cards.add(currentCard);
 				}
 			}
 			
 		}
+	}
+	
+	public Card pop() {
+		Card toReturn = cards.get(0);
+		cards.remove(0);
+		return toReturn;
 	}
 	
 	/**
@@ -58,7 +66,7 @@ public class Deck {
 	 * 
 	 * @return cards : Card[]
 	 */
-	public Card[] getCards() {
+	public ArrayList<Card> getCards() {
 		return cards;
 	}
 	
@@ -67,13 +75,18 @@ public class Deck {
 	 */
 	@Override
 	public String toString() {
-		return "Deck [cards=" + Arrays.toString(cards) + "]";
+		String s = "";
+		for (Card card : cards) {
+			s += card.getName();
+			s += "\n";
+		}
+		return s;
 	}
 	
-//	public static void main(String[] args) {
-//		Deck deck = new Deck();
-//		System.out.println(deck);
-//		System.out.println(deck.cards.length);
-//	}
+	public static void main(String[] args) {
+		Deck deck = new Deck();
+		System.out.println(deck);
+		System.out.println(deck.cards.size());
+	}
 	
 }
