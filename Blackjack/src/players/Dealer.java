@@ -21,6 +21,7 @@ public class Dealer extends BlackJackPlayer{
 	
 	@Override
 	public void play(Hand hand, Dealer dealer) {
+		System.out.print("Dealer shows hand. ");
 		while (true) {
 			if (stand) return;
 			printGameInfo(hand);
@@ -54,6 +55,13 @@ public class Dealer extends BlackJackPlayer{
 	public void dealerGetsNewCard() {
 		Card cardForDealer = deck.pop();
 		hand.addCard(cardForDealer);
+	}
+	
+	public String displayWithHiddenCard() {
+		
+		Card toShow = hand.getHand().get(0);
+		String s = "Dealer hand is " + toShow + " [-]";
+		return s;
 	}
 
 	public Deck getDeck() {

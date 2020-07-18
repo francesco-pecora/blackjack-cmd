@@ -17,9 +17,7 @@ public abstract class BlackJackPlayer {
 	public abstract void play(Hand hand, Dealer dealer);
 	
 	public void printGameInfo(Hand hand) {
-		System.out.println("Cards:");
 		System.out.println(hand);
-		System.out.println();
 	}
 	
 	public boolean isStand() {

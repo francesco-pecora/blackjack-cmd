@@ -14,9 +14,11 @@ public class StandOn17 implements DealerStrategy {
 	@Override
 	public void hit() {
 		if (dealer.getHand().calculateValue() >= Constants.DEALER_STANDS_ON) {
+			System.out.print("Dealer stands");
 			dealer.setStand(true);
 			return;
 		}
+		System.out.print("Dealer hits");
 		dealer.dealerGetsNewCard();
 	}
 	

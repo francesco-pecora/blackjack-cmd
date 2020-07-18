@@ -28,12 +28,15 @@ public class Player extends BlackJackPlayer{
 	@Override
 	public void play(Hand hand, Dealer dealer) {
 		while(!stand) {
-			
+			System.out.print("Your hand is ");
 			printGameInfo(hand);
+			System.out.println(dealer.displayWithHiddenCard());
 			
 			outputActions(hand);
+			
 			// if blackjack, the player does not have to play
 			if (stand) break;
+			
 			pickAction(hand, dealer);
 		}
 		// playing the split hand if there was a split
@@ -42,9 +45,6 @@ public class Player extends BlackJackPlayer{
 			setDidSplit(false);
 			play(splitHand, dealer);
 		}
-		//dealer.play(dealer.getHand(), dealer);
-		
-		System.out.println("FINISH");
 	}
 	
 	
@@ -98,11 +98,11 @@ public class Player extends BlackJackPlayer{
 	public void pickAction(Hand hand, Dealer dealer) {
 		playerInput = scanner.nextLine();
 		if (playerInput.equals("H")) {
-			System.out.println("\nYou hit. Your hand is now...\n");
+			System.out.println("You hit.");
 			hit(hand, dealer);
 		}
 		else if (playerInput.equals("St")) {
-			System.out.println("\nYou stand. The value is " + hand.calculateValue() + ".");
+			System.out.println("You stand. The value is " + hand.calculateValue() + ".");
 			stand();
 		}
 		else if (playerInput.equals("Sp")) {
@@ -110,8 +110,10 @@ public class Player extends BlackJackPlayer{
 			split(dealer);
 		}
 		else if (playerInput.equals("D")) {
-			System.out.println("\nYour doubled your bet to $" + bet * 2);
+			System.out.println("Your doubled your bet to $" + bet * 2 + ".");
 			doubleDown(hand, dealer);
+			System.out.print("Your hand is now ");
+			printGameInfo(hand);
 		}
 	}
 	
@@ -177,10 +179,10 @@ public class Player extends BlackJackPlayer{
 	 * @param dealer : Dealer
 	 */
 	public void doubleDown(Hand hand, Dealer dealer) {
-		setDidDoubleDown(true);
 		dealer.handCardToPlayer(hand);
 		setBet(getBet() * 2);
 		setStand(true);
+		setDidDoubleDown(true);
 	}
 	
 	/// GETTERS AND SETTERS ///
