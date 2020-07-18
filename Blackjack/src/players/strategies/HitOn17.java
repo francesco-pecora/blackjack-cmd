@@ -3,21 +3,20 @@ package players.strategies;
 import constants.Constants;
 import players.Dealer;
 
-public class StandOn17 implements DealerStrategy {
+public class HitOn17 implements DealerStrategy {
 	
 	Dealer dealer;
 	
-	public StandOn17(Dealer dealer) {
+	public HitOn17(Dealer dealer) {
 		setDealer(dealer);
 	}
 	
 	@Override
 	public void hit() {
-		if (dealer.getHand().calculateValue() >= Constants.DEALER_STANDS_ON) {
-			dealer.setStand(true);
-			return;
-		}
 		dealer.dealerGetsNewCard();
+		if (dealer.getHand().calculateValue() > Constants.DEALER_STANDS_ON) {
+			dealer.setStand(true);
+		}
 	}
 	
 	@Override

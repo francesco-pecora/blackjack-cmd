@@ -98,38 +98,21 @@ public class Player extends BlackJackPlayer{
 	public void pickAction(Hand hand, Dealer dealer) {
 		playerInput = scanner.nextLine();
 		if (playerInput.equals("H")) {
-			System.out.println("\nHIT\n");
+			System.out.println("\nYou hit. Your hand is now...\n");
 			hit(hand, dealer);
 		}
 		else if (playerInput.equals("St")) {
-			System.out.println("\nSTAND\n");
+			System.out.println("\nYou stand. The value is " + hand.calculateValue() + ".");
 			stand();
 		}
 		else if (playerInput.equals("Sp")) {
-			System.out.println("\nSPLIT\n");
+			System.out.println("You bet another $" + bet + " to split.");
 			split(dealer);
 		}
 		else if (playerInput.equals("D")) {
-			System.out.println("\nDOUBLE DOWN\n");
+			System.out.println("\nYour doubled your bet to $" + bet * 2);
 			doubleDown(hand, dealer);
 		}
-	}
-	
-	
-	/**
-	 * function that prints the basic information about the round.
-	 * 
-	 * @param hand : Hand
-	 */
-	@Override
-	public void printGameInfo(Hand hand) {
-		System.out.println("Cards:");
-		System.out.println(hand);
-		System.out.println();
-		System.out.println("Current Bet: $" + bet);
-		System.out.println();
-		System.out.println("Current Value: " + hand.calculateValue());
-		System.out.println();
 	}
 	
 	
@@ -234,26 +217,4 @@ public class Player extends BlackJackPlayer{
 	public void setBet(int bet) {
 		this.bet = bet;
 	}
-	
-	
-	
-	public static void main(String[] args) {
-		
-		Player player = new Player();
-		Dealer dealer = new Dealer();
-		
-		player.placeBet(10);
-		
-		dealer.shuffle();
-		
-		dealer.handCardToPlayer(player.getHand());
-		dealer.handCardToPlayer(player.getHand());
-		
-		dealer.dealerGetsNewCard();
-		dealer.dealerGetsNewCard();
-		
-		player.play(player.getHand(), dealer);
-		dealer.play(dealer.getHand(), dealer);
-	}
-	
 }

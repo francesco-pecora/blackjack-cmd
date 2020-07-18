@@ -22,9 +22,9 @@ public class Dealer extends BlackJackPlayer{
 	@Override
 	public void play(Hand hand, Dealer dealer) {
 		while (true) {
+			if (stand) return;
 			printGameInfo(hand);
 			if (hand.isBlackJack()) return;
-			if (stand) return;
 			else strategy.hit();
 		}
 	}
@@ -54,21 +54,6 @@ public class Dealer extends BlackJackPlayer{
 	public void dealerGetsNewCard() {
 		Card cardForDealer = deck.pop();
 		hand.addCard(cardForDealer);
-	}
-	
-	
-	/**
-	 * function that prints the basic information about the round.
-	 * 
-	 * @param hand : Hand
-	 */
-	@Override
-	public void printGameInfo(Hand hand) {
-		System.out.println("Cards:");
-		System.out.println(hand);
-		System.out.println();
-		System.out.println("Current Value: " + hand.calculateValue());
-		System.out.println();
 	}
 
 	public Deck getDeck() {

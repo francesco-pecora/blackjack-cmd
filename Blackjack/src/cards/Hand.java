@@ -76,11 +76,21 @@ public class Hand {
 		else {
 			Card firstCard = hand.get(0);
 			Card secondCard = hand.get(1);
+			
+			// handling the case in which the second card is the 10
 			boolean isFirstCardAce = firstCard.getName().equals("A");
 			boolean isSecondCardTen = secondCard.getName().equals("10");
 			if (isFirstCardAce && isSecondCardTen) {
 				return true;
 			}
+			
+			// handling case in which the first card is the 10
+			boolean isSecondCardAce = secondCard.getName().equals("A");
+			boolean isFirstCardTen = firstCard.getName().equals("10");
+			if (isSecondCardAce && isFirstCardTen) {
+				return true;
+			}
+			
 			return false;
 		}
 	}
@@ -162,11 +172,9 @@ public class Hand {
 	public String toString() {
 		String s = "";
 		for (Card card : hand) {
-			s += "\nName: ";
-			s += card.getName();
-			s += "\tValue: ";
-			s += card.getValue();
+			s += "[" + card.getName() + "] ";
 		}
+		s += " = " + calculateValue(); 
 		return s;
 	}
 	
