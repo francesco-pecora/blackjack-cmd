@@ -42,12 +42,12 @@ public class BlackJackRunner {
 		dealer.dealerGetsNewCard();
 		
 		player.play(player.getHand(), dealer);		
-		if (!player.getHand().isBust()) {
-			dealer.play(dealer.getHand(), dealer);
-			findWinner(player, dealer);
+		if (player.getHand().isBust() && !player.isDidSplit()) {
+			System.out.println("Your hand is bust." + " You lose this hand. -$" + player.getBet() + " initial bet.");
 		}
 		else {
-			System.out.println("Your hand is bust." + " You lose this hand. -$" + player.getBet() + " initial bet.");
+			dealer.play(dealer.getHand(), dealer);
+			findWinner(player, dealer);
 		}
 		
 		
@@ -68,7 +68,7 @@ public class BlackJackRunner {
 				System.out.println("This is a tie. You both have a blackjack. You receive the initial bet back. +$" + player.getBet() + ".");
 			}
 			else {
-				System.out.println("You won with blackjack. +$" + player.getBet() + " initial bet, +$" + (3/2) * player.getBet() + " winnings.");
+				System.out.println("You won with blackjack. +$" + player.getBet() + " initial bet, +$" + (3.0/2) * player.getBet() + " winnings.");
 			}
 			return;
 		}
@@ -79,7 +79,7 @@ public class BlackJackRunner {
 			System.out.println();
 			System.out.print("Your hand is " + secondPlayerHand.calculateValue() + ". ");
 			System.out.println("Dealer hand is " + dealerHand.calculateValue() + ".");
-			compareHands(player, secondPlayerHand, dealer, dealerHand);
+			compareHandsSplit(player, secondPlayerHand, dealer, dealerHand);
 		}
 	}
 	
@@ -106,5 +106,28 @@ public class BlackJackRunner {
 			}
 		}
 	}
-
+	
+	public static void compareHandsSplit(Player player, Hand playerHand, Dealer dealer, Hand dealerHand) {
+		
+		int playerValue = playerHand.calculateValue();
+		int dealerValue = dealerHand.calculateValue();
+		
+		if (playerHand.isBust()) {
+			System.out.println("You lose this hand. -$" + player.getSplitBet() + " initial bet.");
+		}
+		else if (playerValue == dealerValue) {
+			System.out.println("This is a tie. You receive the initial bet back. +$" + player.getSplitBet() + ".");
+		}
+		else if (playerValue > dealerValue) {
+			System.out.println("You won +$" + player.getSplitBet() + " initial bet, +$" + player.getSplitBet() + " winnings.");
+		}
+		else {
+			if (dealerHand.isBust()) {
+				System.out.println("You won +$" + player.getSplitBet() + " initial bet, +$" + player.getSplitBet() + " winnings.");
+			}
+			else {
+				System.out.println("You lose this hand. -$" + player.getSplitBet() + " initial bet.");
+			}
+		}
+	}
 }

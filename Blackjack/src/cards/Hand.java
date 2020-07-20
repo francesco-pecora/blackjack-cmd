@@ -126,7 +126,10 @@ public class Hand {
 				card.setValue(1);
 			}
 			// if we have a Ace that doesn't bust, we track it
-			else if (card.getName().equals("A")) hasAce = true;
+			else if (card.getName().equals("A")) {
+				card.setValue(11);
+				hasAce = true;
+			}
 			totalValue += card.getValue();
 		}
 		// if we track an Ace and we didn't change its value, and 

@@ -7,7 +7,8 @@ import cards.Hand;
 
 public class Player extends BlackJackPlayer{
 
-	private int bet;
+	private double bet;
+	private double splitBet;
 	private boolean didSplit;
 	private boolean didDoubleDown;
 	private String playerInput;
@@ -110,8 +111,8 @@ public class Player extends BlackJackPlayer{
 			split(dealer);
 		}
 		else if (playerInput.equals("D")) {
-			System.out.println("Your doubled your bet to $" + bet * 2 + ".");
 			doubleDown(hand, dealer);
+			System.out.println("Your doubled your bet to $" + bet + ".");
 			System.out.print("Your hand is now ");
 			printGameInfo(hand);
 		}
@@ -157,7 +158,7 @@ public class Player extends BlackJackPlayer{
 	 */
 	public void split(Dealer dealer) {
 		setDidSplit(true);
-		setBet(getBet() * 2);
+		setSplitBet(getBet());
 		
 		Card splitCard = hand.getHand().get(1);		// get one of the cards in the hand
 		hand.removeCard(1);							// delete the card taken from the hand
@@ -165,6 +166,7 @@ public class Player extends BlackJackPlayer{
 		
 		hand.setIsSplit(true);
 		splitHand.setIsSplit(true);
+		setDidSplit(true);
 		
 		dealer.handCardToPlayer(hand);				// hand two new cards
 		dealer.handCardToPlayer(splitHand);			// one for each hand
@@ -180,18 +182,33 @@ public class Player extends BlackJackPlayer{
 	 */
 	public void doubleDown(Hand hand, Dealer dealer) {
 		dealer.handCardToPlayer(hand);
-		setBet(getBet() * 2);
+		
+		if (hand == getSplitHand()) {
+			setSplitBet(getSplitBet() * 2);
+		}
+		else {
+			setBet(getBet() * 2);
+		}
+		
 		setStand(true);
 		setDidDoubleDown(true);
 	}
 	
 	/// GETTERS AND SETTERS ///
 	
+	public double getSplitBet() {
+		return splitBet;
+	}
+
+
+	public void setSplitBet(double splitBet) {
+		this.splitBet = splitBet;
+	}
 	
 	public boolean isDidDoubleDown() {
 		return didDoubleDown;
 	}
-
+	
 	public void setDidDoubleDown(boolean didDoubleDown) {
 		this.didDoubleDown = didDoubleDown;
 	}
@@ -212,11 +229,11 @@ public class Player extends BlackJackPlayer{
 		this.didSplit = didSplit;
 	}
 
-	public int getBet() {
+	public double getBet() {
 		return bet;
 	}
 
-	public void setBet(int bet) {
+	public void setBet(double bet) {
 		this.bet = bet;
 	}
 }
