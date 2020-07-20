@@ -7,12 +7,18 @@ import cards.Hand;
 
 public class Player extends BlackJackPlayer{
 
+	
+	// CLASS ATTRIBUTES
+	
 	private double bet;
 	private double splitBet;
 	private boolean didSplit;
 	private boolean didDoubleDown;
 	private String playerInput;
 	Scanner scanner;
+	
+	
+	// CLASS CONSTRUCTORS
 	
 	public Player() {
 		super();
@@ -22,6 +28,8 @@ public class Player extends BlackJackPlayer{
 		setDidDoubleDown(false);
 	}
 	
+	
+	// CLASS METHODS
 	
 	/**
 	 * main playing function that controls the order of actions.
@@ -49,7 +57,7 @@ public class Player extends BlackJackPlayer{
 	}
 	
 	
-	/// HELPER FUNCTIONS ///
+	// HELPER FUNCTIONS
 	
 	/**
 	 * function that outputs the possible actions that can be taken
@@ -119,7 +127,7 @@ public class Player extends BlackJackPlayer{
 	}
 	
 	
-	/// POSSIBLE ACTIONS ///
+	// POSSIBLE ACTIONS
 	
 	/**
 	 * function that allows the user to increase the bet (only positive bets)
@@ -194,7 +202,8 @@ public class Player extends BlackJackPlayer{
 		setDidDoubleDown(true);
 	}
 	
-	/// GETTERS AND SETTERS ///
+	
+	// GETTERS AND SETTERS
 	
 	public double getSplitBet() {
 		return splitBet;

@@ -17,9 +17,13 @@ public class TestCases {
 		System.out.println();
 		System.out.println();
 		
-		playerSplitNoBlackJack();
+		playerSplit();
 	}
 	
+	
+	/**
+	 * function that simulates the situation where only the player has a blackjack
+	 */
 	public static void onlyPlayerHasBlackJack() {
 		Player player = new Player();
 		Dealer dealer = new Dealer();
@@ -48,6 +52,10 @@ public class TestCases {
 		BlackJackRunner.findWinner(player, dealer);
 	}
 	
+	
+	/**
+	 * function that simulates the situation where the player and the dealer have a blackjack
+	 */
 	public static void playerAndDelaerHaveBlackJack() {
 		Player player = new Player();
 		Dealer dealer = new Dealer();
@@ -76,7 +84,11 @@ public class TestCases {
 		BlackJackRunner.findWinner(player, dealer);
 	}
 	
-	public static void playerSplitNoBlackJack() {
+	
+	/**
+	 * function that simulates the situation where the player can split the hand
+	 */
+	public static void playerSplit() {
 		Player player = new Player();
 		Dealer dealer = new Dealer();
 		

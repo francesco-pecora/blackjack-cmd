@@ -10,8 +10,14 @@ import players.strategies.StandOn17;
 
 public class Dealer extends BlackJackPlayer{
 
+	
+	// CLASS ATTRIBUTES
+	
 	private Deck deck;
 	private StandOn17 strategy;
+	
+	
+	// CLASS CONSTRUCTORS
 	
 	public Dealer() {
 		super();
@@ -19,6 +25,12 @@ public class Dealer extends BlackJackPlayer{
 		strategy = new StandOn17(this);
 	}
 	
+	
+	// CLASS METHODS
+	
+	/**
+	 * main playing function that controls the order of actions.
+	 */
 	@Override
 	public void play(Hand hand, Dealer dealer) {
 		System.out.print("Dealer shows hand. ");
@@ -30,6 +42,7 @@ public class Dealer extends BlackJackPlayer{
 		}
 	}
 	
+	
 	/**
 	 * function that shuffles the deck of cards.
 	 */
@@ -37,6 +50,7 @@ public class Dealer extends BlackJackPlayer{
 		ArrayList<Card> cards = deck.getCards();
 		Collections.shuffle(cards);
 	}
+	
 	
 	/**
 	 * function that hands a new card to the player.
@@ -49,6 +63,7 @@ public class Dealer extends BlackJackPlayer{
 		hand.addCard(cardToHand);
 	}
 	
+	
 	/**
 	 * function that adds a card to the hand of the dealer.
 	 */
@@ -57,6 +72,12 @@ public class Dealer extends BlackJackPlayer{
 		hand.addCard(cardForDealer);
 	}
 	
+	
+	/**
+	 * toString-like function that displays the hand of the dealer with a hidden card
+	 * 
+	 * @return String
+	 */
 	public String displayWithHiddenCard() {
 		
 		Card toShow = hand.getHand().get(0);
@@ -64,6 +85,9 @@ public class Dealer extends BlackJackPlayer{
 		return s;
 	}
 
+	
+	// GETTERS AND SETTERS
+	
 	public Deck getDeck() {
 		return deck;
 	}

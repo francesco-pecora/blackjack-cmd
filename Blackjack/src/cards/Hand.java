@@ -4,9 +4,15 @@ import java.util.ArrayList;
 
 public class Hand {
 
+	
+	// CLASS ATTRIBUTES
+	
 	private ArrayList<Card> hand;
 	private boolean isSplit;
 	private boolean hasAce;
+	
+	
+	// CLASS CONSTRUCTORS
 	
 	public Hand() {
 		hand = new ArrayList<Card>();
@@ -19,6 +25,8 @@ public class Hand {
 		isSplit = isS;
 	}
 	
+	
+	// CLASS METHODS
 	
 	/**
 	 * function that return whether the player has a loosing hand.
@@ -95,6 +103,12 @@ public class Hand {
 		}
 	}
 	
+	
+	/**
+	 * function that returns whether or not the hand can be doubled down
+	 * 
+	 * @return boolean
+	 */
 	public boolean canDoubleDown() {
 		if (hand.size() == 2) return true;
 		return false;
@@ -151,10 +165,19 @@ public class Hand {
 		hand.add(card);
 	}
 	
+	
+	/**
+	 * function that removes the card at an index
+	 * 
+	 * @param index : int
+	 */
 	public void removeCard(int index) {
 		if (index < hand.size()) hand.remove(index);
 	}
 
+	
+	// GETTERS AND SETTERS
+	
 	public boolean isSplit() {
 		return isSplit;
 	}

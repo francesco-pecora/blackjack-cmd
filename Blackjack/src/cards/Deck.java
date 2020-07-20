@@ -6,12 +6,21 @@ import constants.Constants;
 
 public class Deck {
 
+	
+	// CLASS ATTRIBUTES
+	
 	private ArrayList<Card> cards;
 
+	
+	// CLASS CONSTRUCTORS
+	
 	public Deck() {
 		cards = new ArrayList<Card>();
 		initializeDeck();
 	}
+	
+	
+	// CLASS METHODS
 	
 	/**
 	 * function that initializes the decks of 52 cards each, giving each Card a name
@@ -54,10 +63,15 @@ public class Deck {
 					cards.add(currentCard);
 				}
 			}
-			
 		}
 	}
 	
+	
+	/**
+	 * function that returns and removes the top Card of the deck of cards
+	 * 
+	 * @return Card
+	 */
 	public Card pop() {
 		int lastIndex = cards.size() - 1;
 		Card toReturn = cards.get(lastIndex);
@@ -65,14 +79,13 @@ public class Deck {
 		return toReturn;
 	}
 	
-	/**
-	 * function that returns the whole list of cards
-	 * 
-	 * @return cards : Card[]
-	 */
+	
+	// SETTERS AND GETTERS
+	
 	public ArrayList<Card> getCards() {
 		return cards;
 	}
+	
 	
 	/**
 	 * custom output for the Deck of cards
