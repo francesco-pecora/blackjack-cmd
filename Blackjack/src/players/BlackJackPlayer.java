@@ -43,6 +43,4 @@ public abstract class BlackJackPlayer {
 	public void setSplitHand(Hand splitHand) {
 		this.splitHand = splitHand;
 	}
-	
-	
 }

@@ -30,7 +30,7 @@ public class Deck {
 					//      - first member increases the index for each different deck
 					//		- second member increases the index for each suit
 					//		- third member increases the index for each number in one straight
-					//int index = (52 * k) + (13 * i) + (j - 1);
+					// int index = (52 * k) + (13 * i) + (j - 1);
 
 					Card currentCard = new Card("", 0);
 					if (j == 1) {
@@ -47,6 +47,9 @@ public class Deck {
 					}
 					else if (j == 13) {
 						currentCard = new Card("K", 10);
+					}
+					else {
+						System.out.println("[Error] Should not enter this else statement.");
 					}
 					cards.add(currentCard);
 				}
@@ -83,11 +86,4 @@ public class Deck {
 		}
 		return s;
 	}
-	
-	public static void main(String[] args) {
-		Deck deck = new Deck();
-		System.out.println(deck);
-		System.out.println(deck.cards.size());
-	}
-	
 }

@@ -9,14 +9,24 @@ public class BlackJackRunner {
 	static Scanner scanner = new Scanner(System.in);
 	
 	public static void main(String[] args) {
-		playBlackJackRound();
+		
+		System.out.println("WELCOME TO BLACKJACK");
+		
+		while (true) {
+			playBlackJackRound();
+			
+			System.out.println("Play Again? [Y]es [N]o");
+			String playAgain = scanner.next();
+			if (playAgain.equals("N")) {
+				System.out.println("Thanks for playing!");
+				break;
+			}
+		}
 	}
 	
 	public static void playBlackJackRound() {
 		Player player = new Player();
 		Dealer dealer = new Dealer();
-		
-		System.out.println("WELCOME TO BLACKJACK");
 		
 		System.out.println("How much do you want to bet?");
 		int bet = scanner.nextInt();
@@ -31,10 +41,16 @@ public class BlackJackRunner {
 		dealer.dealerGetsNewCard();
 		dealer.dealerGetsNewCard();
 		
-		player.play(player.getHand(), dealer);
-		dealer.play(dealer.getHand(), dealer);
+		player.play(player.getHand(), dealer);		
+		if (!player.getHand().isBust()) {
+			dealer.play(dealer.getHand(), dealer);
+			findWinner(player, dealer);
+		}
+		else {
+			System.out.println("Your hand is bust." + " You lose this hand. -$" + player.getBet() + " initial bet.");
+		}
 		
-		findWinner(player, dealer);
+		
 	}
 	
 	public static void findWinner(Player player, Dealer dealer) {
@@ -49,43 +65,44 @@ public class BlackJackRunner {
 		// handling the blackjack case
 		if (firstPlayerHand.isBlackJack() && !firstPlayerHand.isSplit()) {
 			if (dealerHand.isBlackJack()) {
-				System.out.println("This is a tie. You both have a blackjack");
+				System.out.println("This is a tie. You both have a blackjack. You receive the initial bet back. +$" + player.getBet() + ".");
 			}
 			else {
-				System.out.println("You win with blackjack");
+				System.out.println("You won with blackjack. +$" + player.getBet() + " initial bet, +$" + (3/2) * player.getBet() + " winnings.");
 			}
+			return;
 		}
 		
-		compareHands(firstPlayerHand, dealerHand);
+		compareHands(player, firstPlayerHand, dealer, dealerHand);
 		
 		if (firstPlayerHand.isSplit()) {
 			System.out.println();
 			System.out.print("Your hand is " + secondPlayerHand.calculateValue() + ". ");
 			System.out.println("Dealer hand is " + dealerHand.calculateValue() + ".");
-			compareHands(secondPlayerHand, dealerHand);
+			compareHands(player, secondPlayerHand, dealer, dealerHand);
 		}
 	}
 	
-	public static void compareHands(Hand playerHand, Hand dealerHand) {
+	public static void compareHands(Player player, Hand playerHand, Dealer dealer, Hand dealerHand) {
 		
 		int playerValue = playerHand.calculateValue();
 		int dealerValue = dealerHand.calculateValue();
 		
 		if (playerHand.isBust()) {
-			System.out.println("You lose");
+			System.out.println("You lose this hand. -$" + player.getBet() + " initial bet.");
 		}
 		else if (playerValue == dealerValue) {
-			System.out.println("This is a tie");
+			System.out.println("This is a tie. You receive the initial bet back. +$" + player.getBet() + ".");
 		}
 		else if (playerValue > dealerValue) {
-			System.out.println("You win");
+			System.out.println("You won +$" + player.getBet() + " initial bet, +$" + player.getBet() + " winnings.");
 		}
 		else {
 			if (dealerHand.isBust()) {
-				System.out.println("You win");
+				System.out.println("You won +$" + player.getBet() + " initial bet, +$" + player.getBet() + " winnings.");
 			}
 			else {
-				System.out.println("You lose");
+				System.out.println("You lose this hand. -$" + player.getBet() + " initial bet.");
 			}
 		}
 	}
