@@ -1,5 +1,7 @@
 package cards;
 
+import java.util.ArrayList;
+
 public class Card {
 
 	
@@ -16,6 +18,43 @@ public class Card {
 		setValue(v);
 	}
 
+	
+	public int calculateValueIntoHand(Hand hand) {
+		if (name.equals("J") || name.equals("Q") || name.equals("K")) {
+			return 10;
+		}
+		
+		if (name.equals("A")) {
+			ArrayList<Card> currentCards = hand.getHand();
+			Card firstAceInHand = null;
+			int totalValue = 0;
+			
+			
+			for (Card card : currentCards) {
+				if (card.getName().equals("A")) {
+					firstAceInHand = card;
+					break;
+				}
+			}
+			
+			if (this == firstAceInHand) {
+				for (Card card : currentCards) {
+					if (card == firstAceInHand) {
+						continue;
+					}
+					totalValue += card.getValue();
+				}
+				if (totalValue + 11 <= 21) return 11;
+				return 1;
+			}
+			else {
+				return 1;
+			}
+		}
+		
+		return value;
+	}
+	
 	
 	// GETTERS AND SETTERS
 	

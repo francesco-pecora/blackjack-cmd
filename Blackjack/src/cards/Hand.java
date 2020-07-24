@@ -135,21 +135,8 @@ public class Hand {
 	public int calculateValue() {
 		int totalValue = 0;
 		for (Card card : hand) {
-			// if the new Ace make the hand bust, we give the Ace a value of 1
-			if (card.getName().equals("A") && (totalValue + 11) > 21) {
-				card.setValue(1);
-			}
-			// if we have a Ace that doesn't bust, we track it
-			else if (card.getName().equals("A")) {
-				card.setValue(11);
-				hasAce = true;
-			}
-			totalValue += card.getValue();
+			totalValue += card.calculateValueIntoHand(this);
 		}
-		// if we track an Ace and we didn't change its value, and 
-		// we still bust, then we decrease the value by 10
-		if (hasAce && totalValue > 21) totalValue -= 10;
-		
 		return totalValue;
 	}
 	
